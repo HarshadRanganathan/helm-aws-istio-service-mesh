@@ -8,6 +8,12 @@
 helm upgrade -i istio-base charts/base -n istio-system
 ```
 
+[2] Install the Istio discovery chart which deploys the istiod service
+
+```
+helm upgrade -i istiod charts/istiod -n istio-system --values=charts/istiod/stages/shared-values.yaml
+```
+
 [3] Install the Istio gateway chart which deploys the gateway service
 
 ```
