@@ -1,5 +1,7 @@
 # helm-istio-service-mesh
 
+Heml chart for installing Istion service mesh in the kubernetes cluster
+
 ## Installation steps
 
 [1] Install the Istio base chart which contains cluster-wide resources used by the Istio control plane
