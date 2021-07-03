@@ -1,4 +1,4 @@
-# helm-istio-service-mesh
+# helm-aws-istio-service-mesh
 
 Heml chart for installing Istion service mesh in the kubernetes cluster
 
