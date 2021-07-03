@@ -1,6 +1,18 @@
 # helm-aws-istio-service-mesh
 
-Heml chart for installing Istion service mesh in the kubernetes cluster
+Heml chart for installing Istio service mesh in the kubernetes cluster
+
+## Dependencies
+
+[1] https://github.com/HarshadRanganathan/helm-aws-load-balancer-controller
+
+### Config Updates
+
+In `shared-values.yaml` file available inside `charts/istiod/stages` folder, add values for below settings:
+
+|||
+|--|--|
+|tracer.zipkin.address |Update the tracer address e.g. jaegar |
 
 ## Installation steps
 
