@@ -1,0 +1,28 @@
+{{ $gateway := index .Values "gateways" "istio-ingressgateway" }}
+{{- if $gateway.ingress.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $gateway.name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ $gateway.labels | toYaml | indent 4 }}
+    release: {{ .Release.Name }}
+    istio.io/rev: {{ .Values.revision | default "default" }}
+    install.operator.istio.io/owning-resource: {{ .Values.ownerName | default "unknown" }}
+    operator.istio.io/component: "IngressGateways"
+  {{- with $gateway.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  rules:
+    - http:
+        paths:
+          {{- range $gateway.ingress.paths }}
+          - path: {{ . }}
+            backend:
+              serviceName: {{ $gateway.name }}
+              servicePort: 80
+          {{- end }}
+  {{- end }}
