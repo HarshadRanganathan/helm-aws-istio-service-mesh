@@ -7,3 +7,9 @@
 ```bash
 helm upgrade -i istio-base charts/base -n istio-system
 ```
+
+[3] Install the Istio gateway chart which deploys the gateway service
+
+```
+helm upgrade -i istio-gateway charts/gateways/istio-ingress -n istio-system --values=charts/gateways/istio-ingress/stages/shared-values.yaml
+```
