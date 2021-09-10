@@ -5,7 +5,7 @@ gateways:
       enabled: true
       annotations: 
         kubernetes.io/ingress.class: alb
-        alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":443}]'
+        alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
         alb.ingress.kubernetes.io/target-type: instance
         alb.ingress.kubernetes.io/healthcheck-path: /healthz/ready
         alb.ingress.kubernetes.io/healthcheck-port: status-port
