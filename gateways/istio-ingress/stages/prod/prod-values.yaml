@@ -1,0 +1,5 @@
+gateways:
+  istio-ingressgateway:
+    ingress:
+      annotations: 
+        alb.ingress.kubernetes.io/certificate-arn: # acm arn
