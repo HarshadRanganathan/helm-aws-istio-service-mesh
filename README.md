@@ -31,5 +31,5 @@ helm upgrade -i istiod charts/istiod -n istio-system --values=charts/istiod/stag
 [3] Install the Istio gateway chart which deploys the gateway service
 
 ```
-helm upgrade -i istio-gateway charts/gateways/istio-ingress -n istio-system --values=charts/gateways/istio-ingress/stages/shared-values.yaml
+helm upgrade -i istio-gateway charts/gateways/istio-ingress -n istio-system --values=charts/gateways/istio-ingress/stages/shared-values.yaml --values=charts/gateways/istio-ingress/stages/prod/prod-values.yaml
 ```
