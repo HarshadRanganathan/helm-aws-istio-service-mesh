@@ -36,7 +36,7 @@ helm upgrade -i istio-gateway charts/gateways/istio-ingress -n istio-system --va
 
 ## Automatic Sidecar Injection
 
-To inject sidecar to any of the new pods that get created, set istio-injection=enabled to the namespace.
+To inject sidecar to any of the new pods that get created, set label `istio-injection=enabled` to the namespace.
 
 ```
 kubectl label namespace <namespace> istio-injection=enabled --overwrite
