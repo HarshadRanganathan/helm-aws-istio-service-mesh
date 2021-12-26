@@ -33,3 +33,11 @@ helm upgrade -i istiod charts/istiod -n istio-system --values=charts/istiod/stag
 ```
 helm upgrade -i istio-gateway charts/gateways/istio-ingress -n istio-system --values=charts/gateways/istio-ingress/stages/shared-values.yaml --values=charts/gateways/istio-ingress/stages/prod/prod-values.yaml
 ```
+
+## Automatic Sidecar Injection
+
+To inject sidecar to any of the new pods that get created, set istio-injection=enabled to the namespace.
+
+```
+kubectl label namespace <namespace> istio-injection=enabled --overwrite
+```
