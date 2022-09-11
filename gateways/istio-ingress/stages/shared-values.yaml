@@ -1,5 +1,10 @@
+global:
+  hub: docker.io/istio
+  tag: 1.10.6
+
 gateways:
   istio-ingressgateway:
+    autoscaleMin: 2
     type: NodePort
     ingress:
       enabled: true
@@ -9,3 +14,5 @@ gateways:
         alb.ingress.kubernetes.io/target-type: instance
         alb.ingress.kubernetes.io/healthcheck-path: /healthz/ready
         alb.ingress.kubernetes.io/healthcheck-port: status-port
+      paths:
+        - /*
