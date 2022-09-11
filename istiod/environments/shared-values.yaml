@@ -1,0 +1,13 @@
+global:
+  hub: docker.io/istio
+  tag: 1.10.6
+  tracer:
+    zipkin:
+      # Host:Port for reporting trace data in zipkin format. If not specified, will default to
+      # zipkin service (port 9411) in the same namespace as the other istio components.
+      address: "jaegar-operator-jaeger-collector.istio-system:9411"
+
+pilot:
+  autoscaleMin: 2
+  replicaCount: 2
+  traceSampling: 100.0
