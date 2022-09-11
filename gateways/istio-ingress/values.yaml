@@ -24,22 +24,13 @@ gateways:
       targetPort: 8443
       name: https
       protocol: TCP
-    - port: 15012
-      targetPort: 15012
-      name: tcp-istiod
-      protocol: TCP
-    # This is the port where sni routing happens
-    - port: 15443
-      targetPort: 15443
-      name: tls
-      protocol: TCP
 
-    # Scalability tunning
+    # Scalability tuning
     # replicaCount: 1
     rollingMaxSurge: 100%
     rollingMaxUnavailable: 25%
     autoscaleEnabled: true
-    autoscaleMin: 2
+    autoscaleMin: 1
     autoscaleMax: 5
 
     cpu:
@@ -70,12 +61,6 @@ gateways:
     podAnnotations: {}
     type: LoadBalancer #change to NodePort, ClusterIP or LoadBalancer if need be
 
-    ingress:
-      enabled: false
-      annotations: {}
-      paths:
-        - /*
-
     ##############
     secretVolumes:
     - name: ingressgateway-certs
@@ -91,6 +76,10 @@ gateways:
     ingressPorts: []
     additionalContainers: []
     configVolumes: []
+
+    serviceAccount:
+      # Annotations to add to the service account
+      annotations: {}
 
     ### Advanced options ############
     env:
@@ -177,10 +166,10 @@ global:
   # Default hub for Istio images.
   # Releases are published to docker hub under 'istio' project.
   # Dev builds from prow are on gcr.io
-  hub: docker.io/istio
+  hub: gcr.io/istio-testing
 
   # Default tag for Istio images.
-  tag: 1.9.2
+  tag: latest
 
   # Specify image pull policy if default behavior isn't desired.
   # Default behavior: latest images will be Always else IfNotPresent.
@@ -316,11 +305,14 @@ global:
     # Setting this port to a non-zero value enables STS server.
     servicePort: 0
 
-  # Deprecated, use meshConfig.trustDomain
-  trustDomain: ""
 
 meshConfig:
   enablePrometheusMerge: true
+
+  # The trust domain corresponds to the trust root of a system
+  # Refer to https://github.com/spiffe/spiffe/blob/master/standards/SPIFFE-ID.md#21-trust-domain
+  trustDomain: "cluster.local"
+
   defaultConfig:
     proxyMetadata: {}
     tracing:
